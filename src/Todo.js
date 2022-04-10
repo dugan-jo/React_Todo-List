@@ -1,4 +1,5 @@
 import React from "react";
+import Pagination from "@mui/material/Pagination";
 
 export default function Todo({ todo, toggleTodo }) {
   function handleTodoClick() {
@@ -15,6 +16,8 @@ export default function Todo({ todo, toggleTodo }) {
         />
         {todo.name}
       </label>
+      <h5>IMPORTANCE</h5>
+      <Pagination count={5} color="primary" />
     </div>
   );
 }

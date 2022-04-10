@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react"; //useRef is a hook t
 import TodoList from "./TodoList";
 // import useId from "react-use-uuid";
 import { v4 as uuidv4 } from "uuid";
+import Button from "@mui/material/Button";
 
 const LOCAL_STORAGE_KEY = "todoApp.todos";
 
@@ -46,8 +47,12 @@ function App() {
     <>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
-      <button onClick={handleAddTodo}>Add to list</button>
-      <button onClick={handleClearTodos}>Clear completed Todos</button>
+      <Button variant="contained" color="secondary" onClick={handleAddTodo}>
+        Add to list
+      </Button>
+      <Button variant="contained" onClick={handleClearTodos}>
+        Clear completed Todos
+      </Button>
       <div>{todos.filter(todo => !todo.complete).length} left to do</div>
     </>
   );
