@@ -1,11 +1,23 @@
-import React, { useState, useRef } from "react"; //useRef is a hook that will reference whatever is clicked
+import React, { useState, useRef, useEffect } from "react"; //useRef is a hook that will reference whatever is clicked
+//
 import TodoList from "./TodoList";
 import useId from "react-use-uuid";
 // import uuidv4 from "uuid/v4";
 
+const LOCAL_STORAGE_KEY = "todoApp.todos";
+
 function App() {
   const [todos, setTodos] = useState([]); //object destructuring { id: 1, name: 1, complete: false }
   const todoNameRef = useRef();
+
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedTodos) setTodos(storedTodos);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
 
   function handleAddTodo(e) {
     const name = todoNameRef.current.value; // sets name to the current value of the input text field
