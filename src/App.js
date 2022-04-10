@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react"; //useRef is a hook that will reference whatever is clicked
 import TodoList from "./TodoList";
 
 function App() {
-  const [todos, setTodos] = useState(["todo 1", "todo 2"]); //object destructuring
+  const [todos, setTodos] = useState([]); //object destructuring { id: 1, name: 1, complete: false }
+  const todoNameRef = useRef();
+
+  function handleAddTodo(e) {
+    const name = todoNameRef.current.value; // sets name to the current value of the input text field
+    if (name === "") return; //return nothing if text field is empty (will not make an empty todo item)
+    console.log(name); //check to see if we are returning what is in the text field.
+    setTodos(prevTodos => {
+      return [...prevTodos, { id: 1, name: name, complete: false }];
+    });
+    todoNameRef.current.value = null; // will clear input after you clear Add to list!
+  }
+
   return (
     <>
       <TodoList todos={todos} />
-      <input type="text" />
-      <button>Add to list</button>
+      <input ref={todoNameRef} type="text" />
+      <button onClick={handleAddTodo}>Add to list</button>
       <button>Clear completed Todos</button>
       <div>0 Left to do</div>
     </>
