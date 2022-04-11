@@ -5,6 +5,7 @@ import TodoList from "./TodoList";
 import { v4 as uuidv4 } from "uuid";
 import Button from "@mui/material/Button";
 
+
 const LOCAL_STORAGE_KEY = "todoApp.todos";
 
 function App() {
@@ -46,11 +47,16 @@ function App() {
   return (
     <>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
-      <input ref={todoNameRef} type="text" />
-      <Button variant="contained" color="secondary" onClick={handleAddTodo}>
+      <input ref={todoNameRef} type="text" id="fullWidth" />
+      <Button
+        variant="contained"
+        margin="normal"
+        color="secondary"
+        onClick={handleAddTodo}
+      >
         Add to list
       </Button>
-      <Button variant="contained" onClick={handleClearTodos}>
+      <Button variant="contained" margin="normal" onClick={handleClearTodos}>
         Clear completed Todos
       </Button>
       <div>{todos.filter(todo => !todo.complete).length} left to do</div>
